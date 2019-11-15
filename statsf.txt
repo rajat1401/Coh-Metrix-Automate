@@ -1,0 +1,4 @@
+worldnews, mean= 51.42, median= 51.37, correlation= 0.015
+science, mean= 47.08,median= 47.22, correlation= 0.018
+movies, mean= 53.19, median= 51.81, correlation= 0.02
+Showerthoughts, mean= 52.49, median= 50.0, correlation= 0.003

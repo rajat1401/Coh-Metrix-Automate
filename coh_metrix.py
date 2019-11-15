@@ -1,7 +1,7 @@
 #!/usr/bin/env python
 # coding: utf-8
 
-# In[ ]:
+# In[1]:
 
 
 import sys
@@ -13,7 +13,7 @@ import requests
 import time
 
 
-# In[ ]:
+# In[2]:
 
 
 def get_data(writingSample):
@@ -80,11 +80,15 @@ def get_data(writingSample):
     
 
 
-# In[ ]:
+# In[3]:
 
 
 def get_score(matches):
-    return (matches[3]+matches[4]-matches[0]-matches[1]-matches[2])/500
+    try:
+        return (matches[3]+matches[4]-matches[0]-matches[1]-matches[2])/500
+    except Exception as e:
+        print(e)
+        return 0
     
 
 
@@ -107,7 +111,7 @@ def parse_data(text, writingSampleId, outputFileName):
     workbook.save(outputFileName)
 
 
-# In[ ]:
+# In[4]:
 
 
 def process_file(filename):
@@ -118,6 +122,7 @@ def process_file(filename):
     for comment in open(fullname, 'r'):
         text= json.loads(comment)['body']
         matches= get_data(text)
+        print (text)
         score= get_score(matches)
         print (score)
         scores.append(score)
@@ -134,10 +139,84 @@ def process_file(filename):
     
 
 
-# In[ ]:
+# In[7]:
 
 
-process_file("results-worldnews")
+def read_json():
+    loc= '/home/bansal/Downloads/discourse_reddit.json'
+    appreciationvirality= []
+    humorvirality= []
+    questionvirality= []
+    announcementvirality= []
+    appreciationscores= []
+    humorscores= []
+    questionscores= []
+    announcementscores= []
+    count= 1
+    for comment in open(loc, 'r'):
+        text= json.loads(comment)
+        for post in text['posts']:
+            if('virality' in post and 'body' in post):
+                if(post['majority_type']== 'appreciation'):
+                    appreciationvirality.append(post['virality'])
+                    matches= get_data(post['body'])
+                    score= get_score(matches)
+                    print (count)
+                    count+= 1
+                    print (score)
+                    appreciationscores.append(score)
+                elif(post['majority_type']== 'humor'):
+                    humorvirality.append(post['virality'])
+                    matches= get_data(post['body'])
+                    score= get_score(matches)
+                    print (count)
+                    count+= 1
+                    print (score)
+                    humorscores.append(score)
+                elif(post['majority_type']== 'question'):
+                    questionvirality.append(post['virality'])
+                    matches= get_data(post['body'])
+                    score= get_score(matches)
+                    print (count)
+                    count+= 1
+                    print (score)
+                    questionscores.append(score)
+                elif(post['majority_type']== 'announcement'):
+                    announcementvirality.append(post['virality'])
+                    matches= get_data(post['body'])
+                    score= get_score(matches)
+                    print (count)
+                    count+= 1
+                    print (score)
+                    announcementscores.append(score)
+    
+    np.savetxt("/media/data_dump_1/Rajat/appreciationdiscourse.txt", appreciationscores, newline=" ")
+    np.savetxt("/media/data_dump_1/Rajat/humordiscourse.txt", humorscores, newline=" ")
+    np.savetxt("/media/data_dump_1/Rajat/questiondiscourse.txt", questionscores, newline=" ")
+    np.savetxt("/media/data_dump_1/Rajat/announcementdiscourse.txt", announcementscores, newline=" ")
+    np.savetxt("/media/data_dump_1/Rajat/appreciationdiscoursevirality.txt", appreciationvirality, newline=" ")
+    np.savetxt("/media/data_dump_1/Rajat/humordiscoursevirality.txt", humorvirality, newline=" ")
+    np.savetxt("/media/data_dump_1/Rajat/questiondiscoursevirality.txt", questionvirality, newline=" ")
+    np.savetxt("/media/data_dump_1/Rajat/announcementdiscoursevirality.txt", announcementvirality, newline=" ")
+    print ("The mean of appreciation scores: " + str(np.mean(appreciationscores)))
+    print ("The mean of humor scores: " + str(np.mean(humorscores)))
+    print ("The mean of question scores: " + str(np.mean(questionscores)))
+    print ("The mean of announcement scores: " + str(np.mean(announcementscores)))
+    print ("The median of appreciation scores: " + str(np.median(appreciationscores)))
+    print ("The median of humor scores: " + str(np.median(humorscores)))
+    print ("The median of question scores: " + str(np.median(questionscores)))
+    print ("The median of announcement scores: " + str(np.median(announcementscores)))
+    print ("Appreciation Correlation Scores: " + str(np.corrcoef(appreciationscores, appreciationvirality)[0][1]))
+    print ("Humor Correlation Scores: " + str(np.corrcoef(humorscores, humorvirality)[0][1]))
+    print ("Question Correlation Scores: " + str(np.corrcoef(questionscores, questionvirality)[0][1]))
+    print ("Announcement Correlation Scores: " + str(np.corrcoef(announcementscores, announcementvirality)[0][1]))
+    
+
+
+# In[8]:
+
+
+read_json()
 
 
 # In[ ]:

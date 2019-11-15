@@ -1,0 +1,19 @@
+worldnews, mean= -0.1, median= -0.094, correlation= 0.03
+science, mean= -0.073,median= -0.034, correlation= -0.01
+movies, mean= -0.127, median= -0.12, correlation= 0.0023
+Showerthoughts, mean= -0.129, -0.124, correlation= -0.023
+
+
+SELECT * FROM [fh-bigquery:reddit_comments.2014] WHERE subreddit="worldnews" and author!= "null" LIMIT 10000
+
+
+#after imporoved virality and on submissions
+movies subs count= 5072
+worldnews subs count= 2929
+science subs count= 4437
+Showerthoughts subs count= 6638
+
+Movies 
+Science 3872
+Worldnews on 83187
+Shower on 83154

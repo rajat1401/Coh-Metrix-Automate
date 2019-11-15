@@ -1,0 +1,63 @@
+appreciation: mean= -0.152, median= -0.156, correlation= -0.016
+humor: mean= -0.147, median= -0.146, correlation= 0.016 
+question: mean= -0.123, median= -0.116, correlation= 0.005
+announcement: mean= , median= , correlation= 
+
+
+original total
+app= 8821
+hum= 2420
+ques= 17635
+ann= 2002
+
+
+after scraping total
+app= X
+hum= Y
+ques= Z
+ann= 0
+
+see what happened to announcements and add a measure for retweets as len(['posts']) - 1 sorta. 
+also recompute entire scores after augmenting the dataset. Announcements, Humor, 
+
+bettervirality: (can't be done)
+appreciationCount= 0 
+humorCount= 60
+questionCount= 7038
+announcementCount= 1981
+
+#NEW STATS
+humor: mean= , median= , correlation=  
+question: mean= , median= , correlation= 
+announcement: mean= , median= , correlation= 
+
+
+bettervirality on comments (prospective)
+elaborationCount= 19316
+agreementCount= 5054
+disagreementCount= 3430 
+appreciationCount= 8821
+
+after scraping reddit
+elaborationCount= 18910 check
+agreementCount= 4964 check
+disagreementCount= 3373 check
+appreciationCount= 8556 check
+
+#virality metric 1 (up + down + #comments)
+elaboration: mean= -0.1, median= -0.09, correlation= 0.0095, r2= -5.26
+agreement: mean= -0.122, median= -0.116, correlation= 0.011, r2= -4.48
+disagreement: mean= -0.102, median= -0.098, correlation= -0.006, r2= -5.7 
+appreciation: mean= -0.152, median= -0.156, correlation= 0.02, r2= -5.49
+
+
+counts
+14354
+3571
+2439
+6459
+#virality metric 3 (subs)
+elaboration: mean= -0.11, median= -0.10, correlation= -0.02, r2= -0.87
+agreement: mean= -0.134, median= -0.132, correlation= -0.005, r2= -1.28
+disagreement: mean= -0.099, median= -0.094, correlation= -0.001, r2= -0.67
+appreciation: mean= -0.15, median= -0.152, correlation= 0.001, r2= -1.52
